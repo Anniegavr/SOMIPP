@@ -13,46 +13,62 @@ import java.util.*;
 public class FileEditor {
     public String fname;
 
+
+    public void displayOptions(){
+        System.out.println("1.Read and display text in file -- show content\n" +
+                "2.Copy this file to destination __ -- cp -f\n" +
+                "3.Show this file's permissions -- rp\n" +
+                "4.Replace words in file -- ch -w" +
+                "5.Rename file -- rename -f\n");
+    }
+
+     /**
+     * Function to get the commands from the user.
+     * The commands are read during the runtime, through a scanner.
+     * After the current commands are executed, the program re-calls main program's getActions(), in order
+     * to receive new commands.
+     *It
+     * @throws IOException if the specified file doesn't exist or can't be created.
+     */
     public void getActions() throws IOException {
         displayOptions();
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter the number of the action.\nIn case you want to select multiple actions,\nwrite the numbers separated by comma:\n");
+        System.out.println("Enter the commands.\nIn case you want to run multiple commands" +
+                ",\nwrite them separated by comma:\n");
         String allActions = scan.nextLine();
         String[] actions = allActions.split(",");
         for (String act : actions) {
             switch (act) {
-                case "1":
+                case "show content":
                     readAndDisplayFile();
                     break;
-                case "2":
-                    System.out.println("Day of the week: ");
+                case "cp -f":
+                    System.out.println("Copying file: ");
                     copyFile();
                     break;
-                case "3":
+                case "rp":
                     System.out.println("This file's permissions: ");
                     showFilePermissions();
                     break;
-                case "4":
+                case "ch -w":
                     replaceInFile();
                     break;
-                case "5":
+                case "rename -f":
                     renameFile();
                     break;
             }
         }
     }
 
-    public void displayOptions(){
-        System.out.println("1.Read and display text in file\n" +
-                "2.Copy this file to destination __\n" +
-                "3.Show this file's permissions\n" +
-                "4.Replace words in file\n");
-    }
 
+    /**
+     * Function to read the contents of a text file and display it into the console.
+     * The name of the file is input by the user during runtime.
+     */
     public void readAndDisplayFile(){
         Scanner scan = new Scanner(System.in);
         // enter filename along with its extension
-        System.out.print("Enter the Name of File: ");
+        System.out.print("Enter the full name of the file: ");
         this.fname = scan.nextLine();
 
         String line = null;

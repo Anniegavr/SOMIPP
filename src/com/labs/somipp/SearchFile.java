@@ -1,23 +1,24 @@
 package com.labs.somipp;
 
 import java.io.File;
-import java.util.Scanner;
+import java.util.Objects;
 
 public class SearchFile {
-    String DIR_PTH; // = "/home/chandrashekhar/Desktop";
-    String FILE_NAME; // = "Onlinetutorialspoint.png";
 
-
-
+    /**
+     * Function to search for a file in a given directory.
+     * @param file instantiates a file object when the user searches for a file.
+     *             Null if the file is not found. It can be a folder or a simple file.
+     * @param file_to_search represents the name of the searched file.
+     */
     public void searchFile(File file, String file_to_search) {
         try {
             if (file_to_search != null && !file_to_search.isEmpty()) {
                 if (file != null) {
                     if (file.isDirectory()) {
-                        //do you have permission to read this directory?
+                        /**do you have permission to read this directory?*/
                         if (file.canRead()) {
-//                            System.out.println("Searching in : "+file.getAbsoluteFile());
-                            for (File sub_directory : file.listFiles()) {
+                            for (File sub_directory : Objects.requireNonNull(file.listFiles())) {
                                 if (sub_directory.isDirectory()) {
                                     searchFile(sub_directory, file_to_search);
                                 } else {
